@@ -1,8 +1,9 @@
 require 'nokogiri'
+require 'byebug'
 
 module VnTagger
   class Tagger
-    ROOT_PATH = Dir.pwd
+    ROOT_PATH = File.expand_path('../../..', __FILE__)
     COMMAND = File.join(ROOT_PATH, 'vnTagger.sh')
     INPUT = File.join(ROOT_PATH, 'input.txt')
     OUTPUT = File.join(ROOT_PATH, 'output.xml')
@@ -13,7 +14,7 @@ module VnTagger
 
     def tag
       write_to_file
-      wasGood = system(COMMAND, '-i', INPUT, '-o', OUTPUT)
+      wasGood = system('cd', ROOT_PATH, ";", COMMAND, '-i', INPUT, '-o', OUTPUT)
       if wasGood
         result_from_output
       else
