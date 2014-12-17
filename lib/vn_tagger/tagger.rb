@@ -5,8 +5,8 @@ module VnTagger
   class Tagger
     ROOT_PATH = File.expand_path('../../..', __FILE__)
     COMMAND = File.join(ROOT_PATH, 'vnTagger.sh')
-    INPUT = File.join('input.txt')
-    OUTPUT = File.join('output.xml')
+    INPUT = File.join(ROOT_PATH, 'input.txt')
+    OUTPUT = File.join(ROOT_PATH, 'output.xml')
 
     def initialize(text)
       @text = text
