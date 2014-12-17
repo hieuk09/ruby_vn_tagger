@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'byebug'
 
 describe VnTagger::Tagger do
   describe '#tag' do
