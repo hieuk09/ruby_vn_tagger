@@ -4,7 +4,7 @@ require 'byebug'
 module VnTagger
   class Tagger
     ROOT_PATH = File.expand_path('../../..', __FILE__)
-    COMMAND = File.join(ROOT_PATH, 'vnTagger.sh')
+    COMMAND = 'java -jar vn.hus.nlp.tagger-4.2.0.jar'
     INPUT = File.join(ROOT_PATH, 'input.txt')
     OUTPUT = File.join(ROOT_PATH, 'output.xml')
 
