@@ -1,5 +1,4 @@
 require 'nokogiri'
-require 'byebug'
 
 module VnTagger
   class Tagger
