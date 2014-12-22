@@ -8,9 +8,9 @@ Gem::Specification.new do |spec|
   spec.version       = VnTagger::VERSION
   spec.authors       = ["Hieu Nguyen"]
   spec.email         = ["hieuk09@gmail.com"]
-  spec.summary       = %q{This is a wrapper for vn_tagger library, a A POS tagger for Vietnamese texts.' }
-  spec.description   = %q{This is a wrapper for vn_tagger library, a A POS tagger for Vietnamese texts.' }
-  spec.homepage      = ""
+  spec.summary       = %q{This is a wrapper for vn_tagger library, a A POS tagger for Vietnamese texts. }
+  spec.description   = %q{This is a wrapper for vn_tagger library, a A POS tagger for Vietnamese texts. }
+  spec.homepage      = "https://github.com/hieuk09/ruby_vn_tagger"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0")

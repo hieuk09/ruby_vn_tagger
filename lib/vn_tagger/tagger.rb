@@ -8,7 +8,7 @@ module VnTagger
     OUTPUT = File.join(ROOT_PATH, 'output.xml')
 
     def initialize(text)
-      @text = text
+      @text = normalize(text)
     end
 
     def tag
@@ -38,6 +38,10 @@ module VnTagger
       doc = Nokogiri::XML(file)
       file.close
       doc
+    end
+
+    def normalize(string)
+      string.to_s.gsub(/(\"|\')/, '')
     end
   end
 end
