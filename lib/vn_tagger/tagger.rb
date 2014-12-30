@@ -1,4 +1,5 @@
 require 'nokogiri'
+require 'document'
 
 module VnTagger
   class Tagger
@@ -13,16 +14,28 @@ module VnTagger
 
     def tag
       write_to_file
-      wasGood = system("cd #{ROOT_PATH}; #{COMMAND} -i #{INPUT} -o #{OUTPUT}")
-      if wasGood
-        result_from_output
-      else
-        nil
-      end
+      @success = system("cd #{ROOT_PATH}; #{COMMAND} -i #{INPUT} -o #{OUTPUT}")
+    end
+
+    def xml_result
+      @xml_result ||= if @success
+                        file = File.open(OUTPUT)
+                        xml_document = Nokogiri::XML(file)
+                        file.close
+                        xml_document
+                      else
+                        Nokogiri::XML('')
+                      end
+    end
+
+    def result
+      @result ||= Document.new(xml_result)
     end
 
     def self.tag(text)
-      new(text).tag
+      tagger = new(text)
+      tagger.tag
+      tagger.result
     end
 
     private
@@ -31,13 +44,6 @@ module VnTagger
       file = File.new(INPUT, 'w')
       file.write(@text)
       file.close
-    end
-
-    def result_from_output
-      file = File.open(OUTPUT)
-      doc = Nokogiri::XML(file)
-      file.close
-      doc
     end
 
     def normalize(string)
