@@ -22,8 +22,7 @@ document = VnTagger::Tagger.tag(text)
 
 document.words.map { |word|
   [word.text, word.position]
-} # => [["Mourinho", "Np"], ["là", "V"], ["huấn luyện viên", "N"], ["của", "E"],
-["Chelsea", "Np"]]
+} # => [["Mourinho", "Np"], ["là", "V"], ["huấn luyện viên", "N"], ["của", "E"], ["Chelsea", "Np"]]
 ```
 
 ## Contributing
