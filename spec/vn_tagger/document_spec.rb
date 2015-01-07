@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe VnTagger::Document do
-  let(:xml_text) { '<doc><s><w pos="Np">HLV</w></s></doc>' }
+  let(:xml_text) { '<doc><s><w pos="Np">HLV</w><w pos="CC"></w></s></doc>' }
   let(:xml_document) { Nokogiri::XML(xml_text) }
   let(:document) { described_class.new(xml_document) }
 

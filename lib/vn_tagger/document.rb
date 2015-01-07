@@ -14,7 +14,7 @@ module VnTagger
 
     def uncached_words
       xml_document.xpath('//w').map do |element|
-        Word.new(element.attr('pos'), element.child.text)
+        Word.new(element.attr('pos'), element.text)
       end
     end
 
