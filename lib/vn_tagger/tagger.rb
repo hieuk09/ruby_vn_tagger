@@ -18,12 +18,14 @@ module VnTagger
     end
 
     def xml_result
-      @xml_result ||= if @success
+      @xml_result ||= if is_success?
                         file = File.open(OUTPUT)
                         xml_document = Nokogiri::XML(file)
                         file.close
+                        File.delete(OUTPUT)
                         xml_document
                       else
+                        File.delete(OUTPUT)
                         Nokogiri::XML('')
                       end
     end
@@ -39,6 +41,10 @@ module VnTagger
     end
 
     private
+
+    def is_success?
+      @success && File.exists?(OUTPUT)
+    end
 
     def write_to_file
       file = File.new(INPUT, 'w')
