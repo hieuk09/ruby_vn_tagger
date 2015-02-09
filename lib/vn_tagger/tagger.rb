@@ -18,16 +18,13 @@ module VnTagger
     end
 
     def xml_result
-      @xml_result ||= if is_success?
-                        file = File.open(OUTPUT)
-                        xml_document = Nokogiri::XML(file)
-                        file.close
-                        File.delete(OUTPUT)
-                        xml_document
-                      else
-                        File.delete(OUTPUT)
-                        Nokogiri::XML('')
-                      end
+      @xml_result ||= uncached_xml_result
+    end
+
+    def uncached_xml_result
+      xml_document = is_success? ? read_xml_document : blank_xml_document
+      delete_output
+      xml_document
     end
 
     def result
@@ -42,8 +39,12 @@ module VnTagger
 
     private
 
+    def output_exist?
+      File.exists?(OUTPUT)
+    end
+
     def is_success?
-      @success && File.exists?(OUTPUT)
+      @success && output_exist?
     end
 
     def write_to_file
@@ -54,6 +55,23 @@ module VnTagger
 
     def normalize(string)
       string.to_s.gsub(/(\"|\')/, '')
+    end
+
+    def blank_xml_document
+      Nokogiri::XML('')
+    end
+
+    def read_xml_document
+      file = File.open(OUTPUT)
+      xml_document = Nokogiri::XML(file)
+      file.close
+      xml_document
+    end
+
+    def delete_output
+      if output_exist?
+        File.delete(OUTPUT)
+      end
     end
   end
 end
